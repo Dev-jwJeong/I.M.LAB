@@ -58,9 +58,6 @@ const Nav = () => {
               <LogoImg src="/assets/TKL.png" />
             </LogoBox>
             <MenuBox>
-              <Menu href="/now_playing">nowplaying</Menu>
-              <Menu href="/upcoming">upcoming </Menu>
-              <Menu href="/top_rated">toprated</Menu>
               <Menu href="/nowplaying">NowPlaying</Menu>
               <Menu href="/upcoming">Upcoming </Menu>
               <Menu href="/toprated">TopRated</Menu>

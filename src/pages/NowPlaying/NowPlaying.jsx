@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 import { fetchNowPlayingMovie } from '../../api/api';
 import MovieCardList from '../../components/common/MovieCard/MovieCardList';
 import MovieCardGridBox from '../../components/common/MovieCard/GridBox';
-import { sortBy } from '../../utils/sort';
+import sortBy from '../../utils/sort';
 import Sort from '../../components/filter/sort';
 import Filter from '../../components/filter/filter';
 import styled from 'styled-components';
@@ -24,7 +24,6 @@ const NowPlaying = () => {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery(
-    ['infinite', 'top_rated'],
     ['infinite', 'now_playing'],
     ({ pageParam = 1 }) => fetchNowPlayingMovie(pageParam),
     {
