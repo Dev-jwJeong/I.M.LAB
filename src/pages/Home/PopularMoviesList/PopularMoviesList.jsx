@@ -32,7 +32,6 @@ const PopularMoviesList = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      console.log(popularList);
       setPopularList([...popularList, ...data.pages[data.pageParams.length - 1].results]);
     }
   }, [data]);

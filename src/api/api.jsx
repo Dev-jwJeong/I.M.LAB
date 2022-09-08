@@ -33,7 +33,7 @@ export async function fetchMovieDetail(id) {
 
 export async function fetchSearchMovie(query, page) {
   return await fetch(
-    `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=ko-KR&query=${query}&page=${page}`
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&language=ko-KR&query=${query}&page=${page}&include_adult=false`
   ).then(res => res.json());
 }
 
@@ -79,7 +79,7 @@ export async function fetchMovieBuy(id) {
 
 export async function fetchSearch(query, page) {
   return await fetch(
-    `${BASE_URL}/search/multi?api_key=${API_KEY}&include_adult=false&language=ko-KR&query=${query}&page=${page}`
+    `${BASE_URL}/search/multi?api_key=${API_KEY}&include_adult=false&language=ko-KR&query=${query}&page=${page}&include_adult=false`
   ).then(res => res.json());
 }
 

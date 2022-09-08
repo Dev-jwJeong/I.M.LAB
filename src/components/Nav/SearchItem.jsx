@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SearchItem = ({ item }) => {
   return (
-    <MovieItemBox href={'/MovieDetail?id=' + item.id}>
+    <MovieItemBox href={'/movieDetail/' + item.id}>
       <TextWrapper>
         <Text>{item.name || item.title}</Text>
         <Text>({item.original_name || item.original_title})</Text>
