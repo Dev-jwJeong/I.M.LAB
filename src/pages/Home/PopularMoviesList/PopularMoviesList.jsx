@@ -1,4 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { set } from 'lodash';
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
@@ -8,6 +10,8 @@ import SeeMoreButton from '../MoviesTab/SeeMoreButton';
 
 const PopularMoviesList = () => {
   const { ref, inView } = useInView();
+  const [popularList, setPopularList] = useState([]);
+  let pageIndex = 0;
   const { isLoading, data, fetchNextPage, hasNextPage } = useInfiniteQuery(
     ['homePopular'],
     ({ pageParam = 1 }) => fetchPopularMovie(pageParam),
@@ -15,12 +19,23 @@ const PopularMoviesList = () => {
   );
 
   useEffect(() => {
-    // if (!hasNextPage) {
-    //   alert('마지막 페이지입니다.');
-    //   return;
-    // }
-    if (inView) fetchNextPage();
+    if (isLoading) return;
+    if (!hasNextPage) {
+      alert('마지막 페이지입니다.');
+      return;
+    }
+    if (inView) {
+      fetchNextPage();
+      pageIndex++;
+    }
   }, [inView]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      console.log(popularList);
+      setPopularList([...popularList, ...data.pages[data.pageParams.length - 1].results]);
+    }
+  }, [data]);
 
   return (
     <Box>
@@ -28,8 +43,9 @@ const PopularMoviesList = () => {
       <GuideText>현재 가장 인기있는 영화들을 보여드릴게요!</GuideText>
       <Wrapper>
         {!isLoading
-          ? data.pages[0].results.map(item => <MoviesCard key={item.id} item={item} width="100%" />)
+          ? popularList.map(item => <MoviesCard key={item.id} item={item} width="100%" />)
           : '로딩중 '}
+        <div ref={ref}>{inView}</div>
       </Wrapper>
     </Box>
   );
